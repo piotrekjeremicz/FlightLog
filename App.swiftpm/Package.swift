@@ -32,9 +32,19 @@ let package = Package(
             ]
         )
     ],
+    dependencies: [
+        .package(path: "../Data"),
+        .package(path: "../Domain"),
+        .package(path: "../Presentation")
+    ],
     targets: [
         .executableTarget(
             name: "AppModule",
+            dependencies: [
+                .product(name: "Data", package: "data"),
+                .product(name: "Domain", package: "domain"),
+                .product(name: "Presentation", package: "presentation")
+            ],
             path: ".",
             swiftSettings: [
                 .enableUpcomingFeature("BareSlashRegexLiterals")
