@@ -16,6 +16,8 @@ let package = Package(
         .iOSApplication(
             name: "Flight Log",
             targets: ["AppModule"],
+            bundleIdentifier: "com.flightlog.app",
+            teamIdentifier: "PDQR6W4EQU",
             displayVersion: "1.0",
             bundleVersion: "1",
             appIcon: .placeholder(icon: .plane),
