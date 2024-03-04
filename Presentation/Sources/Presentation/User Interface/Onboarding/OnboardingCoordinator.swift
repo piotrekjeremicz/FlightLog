@@ -12,9 +12,23 @@ public struct OnboardingCoordinator: View {
     
     @State private var navigator = Navigator()
     
+    private let authorizationService: AuthorizationService
+    
+    public init(authorizationService: AuthorizationService) { 
+        self.authorizationService = authorizationService
+    }
+    
     public var body: some View {
         WelcomeView()
             .environment(navigator)
+            .sheet(item: $navigator.destination) { destination in
+                switch destination {
+                case .authorization:
+                    AuthorizationView(
+                        authorizationService: authorizationService
+                    )
+                }
+            }
     }
 }
 
@@ -33,4 +47,10 @@ extension OnboardingCoordinator {
             self.destination = destination
         }
     }
+}
+
+#Preview {
+    OnboardingCoordinator(
+        authorizationService: AuthorizationServicePreview()
+    )
 }
