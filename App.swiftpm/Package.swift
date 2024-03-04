@@ -38,7 +38,8 @@ let package = Package(
     dependencies: [
         .package(path: "../Data"),
         .package(path: "../Domain"),
-        .package(path: "../Presentation")
+        .package(path: "../Presentation"),
+        .package(path: "../../packages/swifty-webview")
     ],
     targets: [
         .executableTarget(
@@ -46,7 +47,8 @@ let package = Package(
             dependencies: [
                 .product(name: "Data", package: "data"),
                 .product(name: "Domain", package: "domain"),
-                .product(name: "Presentation", package: "presentation")
+                .product(name: "Presentation", package: "presentation"),
+                .product(name: "WebView", package: "swifty-webview")
             ],
             path: ".",
             swiftSettings: [
