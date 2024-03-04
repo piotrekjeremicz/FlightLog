@@ -13,6 +13,8 @@ public struct OnboardingCoordinator: View {
     @State private var navigator = Navigator()
     
     public var body: some View {
+        WelcomeView()
+            .environment(navigator)
     }
 }
 
