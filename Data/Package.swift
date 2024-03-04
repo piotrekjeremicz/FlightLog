@@ -15,6 +15,7 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../Domain"),
+        .package(path: "../../packages/swifty-webview"),
     ],
     targets: [
         .target(

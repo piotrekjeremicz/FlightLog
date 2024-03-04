@@ -15,12 +15,14 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../Domain"),
+        .package(path: "../../packages/swifty-webview"),
     ],
     targets: [
         .target(
             name: "Presentation",
             dependencies: [
                 "Domain",
+                .product(name: "WebView", package: "swifty-webview")
             ]),
         .testTarget(
             name: "PresentationTests",
