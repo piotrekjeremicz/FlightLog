@@ -29,6 +29,13 @@ public struct OnboardingCoordinator: View {
                     )
                 }
             }
+            .onChange(of: navigator.destination, monitorAuthorizationState(_:_:))
+    }
+    
+    private func monitorAuthorizationState(_ oldValue: Navigator.Destination?, _ newValue: Navigator.Destination?) {
+        if oldValue == .authorization, newValue == nil, authorizationService.state == .isFileDownloaded {
+            
+        }
     }
 }
 

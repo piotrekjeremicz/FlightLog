@@ -13,6 +13,7 @@ import SwiftUI
 @Observable
 final class AuthorizationViewModel {
         
+    var fileUrl: URL?
     var request: URLRequest?
     
     let webViewNavigator: WebViewNavigator = WebViewNavigator()
@@ -21,7 +22,6 @@ final class AuthorizationViewModel {
     private let getInitialRequestUseCase: GetInitialRequestUseCase
     private let handleAuthorizationStateUseCase: HandleAuthorizationStateUseCase
     private let handlePhaseStateUseCase: HandlePhaseStateUseCase
-    
     
     init(authorizationService: AuthorizationService) {
         getInitialRequestUseCase = GetInitialRequestUseCase(authorizationService: authorizationService)
@@ -51,6 +51,13 @@ final class AuthorizationViewModel {
     func proceed(with fileUrl: URL?) {
         print("Final stage")
         print(fileUrl)
+        
+        self.fileUrl = fileUrl
+    }
+    
+    func shouldCompleteAuthorizationFlow(_ oldValue: URL?, _ newValue: URL?, whenCompleted dismiss: DismissAction) {
+        guard oldValue == nil, let newValue else { return }
+        dismiss()
     }
 }
 

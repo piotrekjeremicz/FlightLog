@@ -12,6 +12,7 @@ import SwiftUI
 
 struct AuthorizationView: View {
     
+    @Environment(\.dismiss) private var dismiss
     @State private var viewModel: AuthorizationViewModel
     
     init(authorizationService: AuthorizationService) {
@@ -34,6 +35,9 @@ struct AuthorizationView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear(perform: viewModel.initialRequest)
+        .onChange(of: viewModel.fileUrl) {
+            viewModel.shouldCompleteAuthorizationFlow($0, $1, whenCompleted: dismiss)
+        }
     }
 }
 
