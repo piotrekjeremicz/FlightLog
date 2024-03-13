@@ -19,11 +19,13 @@ final class AuthorizationViewModel {
     let webViewNavigator: WebViewNavigator = WebViewNavigator()
     var authorizationDownloadObserver: AuthorizationDownloadObserver?
 
+    private let dataImportService: DataImportService
+
     private let getInitialRequestUseCase: GetInitialRequestUseCase
     private let handleAuthorizationStateUseCase: HandleAuthorizationStateUseCase
     private let handlePhaseStateUseCase: HandlePhaseStateUseCase
     
-    init(authorizationService: AuthorizationService) {
+    init(authorizationService: AuthorizationService, dataImportService: DataImportService) {
         getInitialRequestUseCase = GetInitialRequestUseCase(authorizationService: authorizationService)
         handleAuthorizationStateUseCase = HandleAuthorizationStateUseCase(authorizationService: authorizationService)
         handlePhaseStateUseCase = HandlePhaseStateUseCase(authorizationService: authorizationService)
@@ -48,11 +50,9 @@ final class AuthorizationViewModel {
         request = exportRequest
     }
     
-    func proceed(with fileUrl: URL?) {
-        print("Final stage")
-        print(fileUrl)
-        
-        self.fileUrl = fileUrl
+    func proceed(with file: URL?) {
+        dataImportService.registerFile(url: file)
+        fileUrl = file
     }
     
     func shouldCompleteAuthorizationFlow(_ oldValue: URL?, _ newValue: URL?, whenCompleted dismiss: DismissAction) {

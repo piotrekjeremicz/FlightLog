@@ -8,5 +8,7 @@
 import Foundation
 
 public protocol DataImportService {
-    
+    var fileUrl: URL? { get set }
+
+    func registerFile(url: URL)
 }
